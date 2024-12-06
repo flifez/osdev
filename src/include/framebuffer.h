@@ -1,8 +1,9 @@
-//
-// Created by FlifeX on 12/6/24.
-//
+#ifndef FRAMEBUFFER_H
+#define FRAMEBUFFER_H
 
-#ifndef OSDEV_FRAMEBUFFER_H
-#define OSDEV_FRAMEBUFFER_H
+#include "../limine.h"
 
-#endif //OSDEV_FRAMEBUFFER_H
+extern volatile struct limine_framebuffer_request
+framebuffer_request;
+
+#endif // FRAMEBUFFER_H

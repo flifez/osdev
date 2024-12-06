@@ -3,7 +3,7 @@
 
 #include "stdint-gcc.h"
 #include "stddef.h"
-#include "limine.h"
+#include "../../limine.h"
 #include "font8x8.h"
 
 void draw_pixel(struct limine_framebuffer *fb, size_t x, size_t y, uint32_t color);

@@ -3,11 +3,14 @@
 #include <stdbool.h>
 #include "limine.h"
 
+#include "include/kernel/bitmap.h"
+#include "include/kernel/tty.h"
+
 __attribute__((used, section(".limine_requests")))
 static volatile LIMINE_BASE_REVISION(3);
 
 __attribute__((used, section(".limine_requests")))
-static volatile struct limine_framebuffer_request
+volatile struct limine_framebuffer_request
 framebuffer_request = {
     .id = LIMINE_FRAMEBUFFER_REQUEST,
     .revision = 0
@@ -88,10 +91,13 @@ void kmain(void) {
 
     struct limine_framebuffer *framebuffer = framebuffer_request.response->framebuffers[0];
 
-    for (size_t i = 0; i < 500; i++) {
-        volatile uint32_t *fb_ptr = framebuffer->address;
-        fb_ptr[i * (framebuffer->pitch / 4) + i] = 0xffffff;
-    }
+    draw_string(framebuffer, "Hello, World!", 10, 10, 0x00FF00);
+
+    t_initialize();
+
+    t_wstring("64-bit Long Mode\n");
+    t_wstring("\t\t\t\t\t\t\t\tHello, World!\n");
+    t_wstring("osdev-test");
 
     hcf();
 }
